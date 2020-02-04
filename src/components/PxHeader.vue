@@ -3,14 +3,18 @@
     <header class="flex justify-center">
       <div class="flex flex-col sm:flex-row justify-around items-center">
         <div class="flex flex-col items-center">
-          <img class="rounded-full" src="../assets/ivan.jpeg" alt="ivan" />
+          <img
+            class="rounded-full"
+            src="../assets/ivan.jpeg"
+            :alt="user.username"
+          />
         </div>
         <div class="my-12 px-12 flex flex-col">
           <h1 class="title text-5xl">
             {{ user.first_name }} {{ user.last_name }}
           </h1>
-          <p class="subtitle">({{ user.username }})</p>
-          <h3 class="subtitle text-5xl">Backend Developer</h3>
+          <h3 class="subtitle text-5xl">{{ profile.profession }}</h3>
+          <p class="subtitle text-3xl">{{ profile.location }}</p>
           <div class="flex mb-4">
             <linkedin :size="48" />
             <github-circle :size="48" :fillColor="'#b71c1c'" />
@@ -63,6 +67,7 @@ import Gitlab from "vue-material-design-icons/Gitlab.vue";
 
 export default {
   name: "PxHeader",
+
   components: {
     Linkedin,
     GithubCircle,
@@ -70,7 +75,8 @@ export default {
   },
 
   props: {
-    user: {}
+    user: {},
+    profile: {}
   }
 };
 </script>

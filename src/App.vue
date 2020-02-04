@@ -1,6 +1,6 @@
 <template>
   <main>
-    <px-header :user="user" />
+    <px-header :user="user" :profile="profile" />
     <router-view class="container px-5 sm:px-20 py-20 flex justify-content" />
   </main>
 </template>
@@ -18,12 +18,24 @@ export default {
 
   data() {
     return {
-      user: {}
+      user: {},
+      profile: {}
     };
   },
 
   created() {
-    api.getUser().then(user => (this.user = user));
+    this.getUserData();
+  },
+
+  methods: {
+    getUserData() {
+      const username = "bawbamgeek";
+      Promise.all([api.getUser(username), api.getProfile(username)]).then(
+        ([user, profile]) => {
+          (this.user = user), (this.profile = profile);
+        }
+      );
+    }
   }
 };
 </script>
